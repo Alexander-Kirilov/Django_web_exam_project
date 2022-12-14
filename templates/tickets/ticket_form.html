@@ -1,0 +1,40 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+    <div class="container d-flex justify-content-center wrapper "
+         style="width: 25%; background-color: rgba(255,255,255,0.97);">
+        <div class="col mt-5">
+            <form method="post">
+                {% csrf_token %}
+                {% if ticket.id %}
+                    <h1>Edit Ticket:</h1>
+                    <h2>Number: {{ ticket.id }}</h2>
+                {% else %}
+                    <h1>Create new ticket</h1>
+                {% endif %}
+                <table class="table">
+                    {{ form.as_table }}
+                </table>
+                <div class="container d-flex justify-content-center" style="width: 10%;">
+                    <input type="submit" class="btn btn-primary btn-sm" value="Submit"
+                           style="margin-right: 10px; margin-top: 30px; width: auto;">
+                    <input type="submit" class="btn btn-danger btn-sm"
+                           style="margin-top: 30px;width: auto; background-color: darkred; border-color: black"
+                           onclick="window.location='{% url 'tickets:all' %}';
+                                   return false;" value="Cancel">
+                    {% if ticket.id %}
+                        <input class="btn btn-danger btn-sm"
+                               onclick="location.href='{% url 'tickets:ticket delete' ticket.id %}'"
+                               type="button"
+                               style="margin-top: 30px;width: auto;margin-left: 250px;border-color: black;
+                               background-color: #e40001; color:black; font-weight: bolder"
+                               value="Delete">
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- END BOOTSTRAP FORM -->
+
+{% endblock %}

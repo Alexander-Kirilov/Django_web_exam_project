@@ -1,0 +1,46 @@
+.wrapper {
+    height: auto;
+    border-radius: 7px 7px 7px 7px;
+    box-shadow: 0 0 3px 4px gray;
+    margin-top: 5em;
+    margin-bottom: 2em;
+    background: rgba(215, 215, 215, 0.96);
+    padding: 15px 10px 19px;
+    opacity: 99%;
+    color: #000000;
+    font-size: 16px;
+}
+
+.wrapper-edit{
+    border-radius: 7px 7px 7px 7px;
+    box-shadow: 0 0 3px 4px gray;
+    margin-top: 5em;
+    margin-bottom: 2em;
+    background: rgba(215, 215, 215, 0.96);
+    padding: 15px 10px 19px;
+    opacity: 99%;
+    color: #000000;
+    font-size: 16px;
+    max-width: 600px;
+}
+
+input, input + label > i, textarea, select {
+    border-radius: 3px;
+    box-shadow: none;
+    border: 1px solid #384049;
+    background: #15171b;
+    display: block;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.wrapper h1 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.wrapper h2 {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}

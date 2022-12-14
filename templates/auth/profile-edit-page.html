@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+{% load placeholders %}
+{% load static %}
+{% block content %}
+    <div class="wrapper-edit">
+        <div class="edit-profile-title">Edit Profile</div>
+        <form method="post" action="{% url 'edit user' pk=user.pk %}">
+            <i class="validation-summary-errors">
+                {% if form.errors %}
+                        {{ form.errors }}
+                {% endif %}</i>
+            <br>
+            <p>Username: {{ user.username }}</p>
+            <p></p>
+            <hr>
+            <br>
+            <p class="title">First name:</p>
+            <p>{{ form.first_name|placeholder:'Enter last name: ' }}</p>
+            <hr>
+            <p class="title">Last name:</p>
+            <p>{{ form.last_name|placeholder:'Enter last name: ' }}</p>
+            <hr>
+            <p class="title">Email:</p>
+            <p>{{ form.email|placeholder:'Enter email: ' }} </p>
+            <hr>
+            <p class="title">Position:</p>
+            <p>{{ form.position|placeholder:'Enter position: ' }}</p>
+            <hr>
+            <p class="title">Address:</p>
+            <p>{{ form.address|placeholder:'Enter address: ' }}</p>
+            <hr>
+            <p class="title">City:</p>
+            <p>{{ form.city|placeholder:'Enter city: ' }}</p>
+            <hr>
+            <p class="title">Country:</p>
+            <p>{{ form.country|placeholder:'Enter country: ' }}
+            <p>
+                <button class="edit-btn" type="submit">Edit</button>
+                {% csrf_token %}
+        </form>
+    </div>
+{% endblock %}

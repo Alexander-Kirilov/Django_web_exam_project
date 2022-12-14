@@ -1,0 +1,28 @@
+.card-text {
+    text-align: center;
+}
+
+.card-text .title {
+    text-align: center;
+    text-underline: #cecfd5;
+    font-weight: bolder;
+    font-size: 22px;
+}
+
+.card-title {
+
+    text-align: center;
+}
+
+.text-right {
+
+    inline-size: auto;
+    display: inline-block;
+}
+
+.edit-profile-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bolder;
+    margin-left: 60px;
+}

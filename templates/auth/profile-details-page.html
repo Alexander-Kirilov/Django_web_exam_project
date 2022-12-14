@@ -1,0 +1,53 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_filters %}
+{% block content %}
+    {% if user.is_authenticated %}
+        {% load crispy_forms_tags %}
+        <div class=" wrapper-edit" style="width: 35rem">
+            <div class="edit-profile-title">Details for {{ user.username|title }}
+                {% if is_owner %}
+                    <a class="right" href="{% url 'delete user' pk=object.pk %}">
+                        <img class="topnav-right bin-img" src="{% static 'images/icon-remove-22.jpg' %}"
+                             alt="bin button" width="30px">
+                    </a>
+                    <a class="topnav-right" href="{% url 'edit user' pk=user.pk %}">
+                        <img src="{% static 'images/edit-pen-icon-6.jpg' %}"
+                             alt="edit button"
+                             width="30px">
+                    </a>
+                {% endif %}
+            </div>
+            <hr>
+            <div class="card-text">
+                <p class="title">Username:</p>
+                <p>{{ user.username }}</p>
+                <hr>
+                <p class="title">Name:</p>
+                <p>{% if user.profile.first_name and user.profile.last_name %}
+                    {{ user.full_name }}
+                {% else %}
+                    --
+                {% endif %}
+                </p>
+                <hr>
+                <p class="title">Email:</p>
+                <p>{{ user.profile.email|default_if_none:"--" }} </p>
+                <hr>
+                <p class="title">Position:</p>
+                <p>{{ user.profile.position|default_if_none:"--" }} </p>
+                <hr>
+                <p class="title">Address:</p>
+                <p>{{ user.profile.address|default_if_none:"--" }} </p>
+                <hr>
+                <p class="title">City:</p>
+                <p>{{ user.profile.city|default_if_none:"--" }} </p>
+                <hr>
+                <p class="title">Country:</p>
+                <p>{{ user.profile.country|default_if_none:"--" }} </p>
+            </div>
+        </div>
+    {% else %}
+        <h1>You are not authenticated!</h1>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    {% csrf_token %}
+    {#            TODO: make styling in css!#}
+
+    <div class="container-sm wrapper" style="max-width: 500px">
+    <p style="text-align: center; font-weight: bold"><a style="color: black; text-decoration: none"
+                                                        href="{% url 'news_details' news.pk %}">Заглавие:</a><br>{{ news.title }}
+    </p>
+    <h6>Съдържание: </h6><p>{{ news.content|linebreaks }}</p>
+    <hr>
+    <p style="font-size: 14px; text-align-last: right; font-weight: bold">{{ news.created_at|date:'Y-M-d H:i' }}
+        Created by: {{ news.created_by }}</p>
+    <h6 style="font-size: 12px; text-align-last: right; ">Обновен: </h6>
+    <p style="font-size: 14px; text-align-last: right; ">{{ news.updated_at|date:'Y-M-d H:i' }}
+    </p>
+    <hr>
+    {#                TODO:make it in the center#}
+    <div class="image">
+        {% if news.news_photos %}
+            <img src="{{ news.news_photos.url }}" alt="news{{ news.id }}" width="400px" style="position: center">
+        {% endif %}
+    </div>
+    <br>
+    <a href="{% url "news_list_all" %}"> Back</a>
+
+
+{% endblock %}
+

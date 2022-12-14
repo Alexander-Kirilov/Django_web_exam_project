@@ -1,0 +1,30 @@
+{% extends 'base/base.html' %}
+
+{% load placeholders %}
+
+{% block content %}
+    <form method="post" action="{% url 'register user' %}">
+        <div class="login-register-div">
+            <div class="login-register-box">
+                <h1>Ticket System</h1>
+                <i>{% if  form.errors %}
+                    {% if form.username.errors %}
+                        <p>Username is in use! Try again</p>
+                    {% elif form.password2 != form.password1 %}
+                        <p>Two passwords did not matched! Try again.</p>
+                    {% endif %}
+                {% endif %}</i>
+                {{ form.username|placeholder:'Username: ' }}
+                {{ form.password1|placeholder:'Password: ' }}
+                {{ form.password2|placeholder:'Repeat password: ' }}
+                <button type="submit">Register</button>
+                {% csrf_token %}
+            </div>
+
+            <div class="second-option">
+                <p>Have an account? <a href="{% url 'login user' %}">Log in</a></p>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}

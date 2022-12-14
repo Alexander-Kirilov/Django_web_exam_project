@@ -1,0 +1,34 @@
+{% load static %}
+
+<link href='https://fonts.googleapis.com/css?family=Roboto:500,900,100,300,700,400' rel='stylesheet'>
+<link rel="stylesheet" href="{% static 'css/nav.css' %}">
+<nav class="stroke">
+    <ul>
+        <li class="left">
+            <a href="{% url 'index' %}" class="left">
+                <img src="{% static 'images/fantastico_group_logo.png' %}"
+                     width="150px" margin="0"
+                     alt="image">
+            </a>
+        <li class="left noHover"><a class="left">
+            {% if request.user.is_authenticated %}
+                Hello,
+                {% if user.profile.first_name and user.profile.last_name %}
+                    {{ user.full_name }}
+                {% else %}
+                    {{ user.username }}
+                {% endif %}
+                </a>
+                </li>
+                <li class="right"><a href="{% url 'logout user' %} ">Log out</a></li>
+                <li class="right"><a href="{% url 'details user' pk=request.user.pk %}">Profile</a></li>
+                <li class="right"><a href="{% url 'news_create' %}">Create News</a></li>
+                <li class="right"><a href="{% url 'news_list_all' %}">News</a></li>
+                <li class="right"><a href="{% url 'tickets:all' %}">All tickets</a></li>
+                <li class="right"><a href="{% url 'tickets:ticket create' %}">Add ticket</a></li>
+            {% else %}
+                <li class="left"><a href="{% url 'register user' %}">Sign up</a></li>
+                <li class="left"><a href="{% url 'login user' %}">Login</a></li>
+            {% endif %}
+    </ul>
+</nav>

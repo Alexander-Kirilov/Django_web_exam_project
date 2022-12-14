@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<head>
+    <link rel="stylesheet" href=
+            "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"/>
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/fantastico_group_icon.jpg' %}">
+    <title>Ticket System </title>
+
+</head>
+
+<body style="background-image: url({% static 'images/back_fantastico.png' %});">
+<nav>
+    {% include 'base/partials/nav.html' %}
+</nav>
+<div>
+{#    {% if form.errors %}#}
+{#        {% for message in errors %}#}
+{#            <div class="alert alert-warning alert-dismissible fade show" role="alert">#}
+{#                {{ message }}#}
+{#                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#    {% endif %}#}
+
+    {% block content %}
+    {% endblock content %}
+</div>
+<footer class="footer">
+    ©Fantastico Group OOD 2022
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+  web:
+    build: D:\Programming\SoftUni\Python\WEB\Projects\ff_tickets
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+    - D:\Programming\SoftUni\Python\WEB\Projects\ff_tickets\:/usr/src/app/
+    ports:
+      - "8000:8000"
+    env_file:
+      - D:\Programming\SoftUni\Python\WEB\Projects\ff_tickets\envs\.env.dock
+    depends_on:
+     - postgres    
+     - mailcatcher
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres-user
+      POSTGRES_DB: ff_tickets_db
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - D:\Programming\SoftUni\Python\WEB\Projects\ff_tickets\postgresql:/var/lib/postgresql/data
