@@ -12,7 +12,6 @@ DEBUG = int(os.environ.get('DEBUG', 1))
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(' ')
 
-CSRF_TRUSTED_ORIGINS = [f'https://{x}' for x in ALLOWED_HOSTS]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -29,6 +28,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'ff_tickets.news',
     'cloudinary',
+    'ff_tickets.instructions',
 ]
 
 MIDDLEWARE = [
@@ -65,14 +65,15 @@ WSGI_APPLICATION = 'ff_tickets.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('DB_ENGINE'),
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ff_tickets_db',
+        'USER': 'postgres-user',
+        'PASSWORD': 'password',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     },
 }
+print(os.environ.get('DB_ENGINE'))
 
 if DEBUG:
     AUTH_PASSWORD_VALIDATORS = []
@@ -128,17 +129,6 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-if DEBUG:
-    EMAIL_HOST = os.environ.get('EMAIL_HOST')
-    EMAIL_PORT = os.environ.get('EMAIL_PORT')
-    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-else:
-    EMAIL_BACKEND = 'django_mailjet.backends.MailjetBackend'
-    MAILJET_API_KEY = os.environ.get('EMAIL_HOST_USER')
-    MAILJET_API_SECRET = os.environ.get('EMAIL_HOST_PASSWORD')
-
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 #
 # LOGGING = {
 #     'version': 1,

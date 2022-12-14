@@ -22,10 +22,6 @@ class NewsAllListView(views.ListView):
     template_name = 'news/news_list_all.html'
     model = News
     ordering = ['-created_at']
-    default_paginate_by = 3
-
-    def get_paginate_by(self, queryset):
-        return self.request.GET.get('page_size', self.default_paginate_by)
 
 
 class NewsCreateView(views.CreateView):

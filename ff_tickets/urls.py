@@ -10,7 +10,8 @@ urlpatterns = [
     path('', NewsListView.as_view(), name='index'),
     path('tickets/', include('ff_tickets.tickets.urls')),
     path('auth_app/', include('ff_tickets.auth_app.urls')),
-    path('news/', include('ff_tickets.news.urls'))
+    path('news/', include('ff_tickets.news.urls')),
+    path('instructions/', include('ff_tickets.instructions.urls')),
 ]
 
 if settings.DEBUG:

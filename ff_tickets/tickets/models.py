@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-from ff_tickets.auth_app.models import AppUser
 from ff_tickets.core.model_mixins import StoresName, ProblemType, ProblemStatusChoice
 
 UserModel = get_user_model()
@@ -77,7 +76,7 @@ class Ticket(models.Model):
     )
 
     assignee = models.ForeignKey(
-        AppUser,
+        UserModel,
         null=True,
         blank=True,
         on_delete=models.CASCADE,

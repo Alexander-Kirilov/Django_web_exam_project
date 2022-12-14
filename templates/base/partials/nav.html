@@ -24,6 +24,8 @@
                 <li class="right"><a href="{% url 'details user' pk=request.user.pk %}">Profile</a></li>
                 <li class="right"><a href="{% url 'news_create' %}">Create News</a></li>
                 <li class="right"><a href="{% url 'news_list_all' %}">News</a></li>
+                <li class="right"><a href="{% url 'instruction_create' %}">Create instruction</a></li>
+                <li class="right"><a href="{% url 'instructions_all' %}">instructions</a></li>
                 <li class="right"><a href="{% url 'tickets:all' %}">All tickets</a></li>
                 <li class="right"><a href="{% url 'tickets:ticket create' %}">Add ticket</a></li>
             {% else %}

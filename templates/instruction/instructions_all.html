@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom_table.css' %}">
+    {% csrf_token %}
+    {% if user.is_authenticated %}
+        <h1 class="text-center" style="padding-top: 50px">All Instructions</h1>
+
+        <div style="overflow-x: auto; max-width: 500px">
+        <table class="table table-custom table-striped table-bordered wrapper">
+            <thead>
+            <tr>
+                <th class="text-center" style="width: 3%;">име</th>
+                <th class="text-center" style="width: 4%;">Описание</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for instr in object_list %}
+                <tr>
+                    <td class="text-center">{{ instr.instruction_name }}</td>
+                    <td class="text-center">{{ instr.instruction_text }}</td>
+                </tr>
+                </tbody>
+                </table>
+            {% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}

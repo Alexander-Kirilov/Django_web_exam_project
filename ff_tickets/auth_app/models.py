@@ -1,7 +1,6 @@
 from django.contrib.auth import models as auth_models
 from django.core import validators
 from django.db import models
-from django.views.generic.edit import ModelFormMixin
 
 from ff_tickets.auth_app.managers import AppUserManager
 from ff_tickets.core.validators import validate_only_letters
