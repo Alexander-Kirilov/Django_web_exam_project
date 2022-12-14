@@ -151,6 +151,8 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
     )
 
+    # instructions = modoel.
+
     def __str__(self):
         return str(self.user)
 

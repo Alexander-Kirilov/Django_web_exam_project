@@ -73,6 +73,7 @@ class Ticket(models.Model):
         verbose_name='Коментар',
         blank=True,
         null=True,
+
     )
 
     assignee = models.ForeignKey(
@@ -82,6 +83,7 @@ class Ticket(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Назначен',
         related_name='assignee_user'
+
     )
 
     class Meta:

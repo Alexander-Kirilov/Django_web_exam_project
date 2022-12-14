@@ -1,7 +1,5 @@
 from django.db import models
 
-from ff_tickets.auth_app.models import Profile
-
 
 class Instruction(models.Model):
     instruction_name = models.CharField(

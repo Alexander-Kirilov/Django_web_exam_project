@@ -4,10 +4,6 @@ from django.views import generic as views
 from ff_tickets.tickets.models import Ticket
 
 
-class IndexTemplateView(views.TemplateView):
-    template_name = 'core/index.html'
-
-
 class TicketBaseView(views.View):
     model = Ticket
     fields = ['store_name', 'problem_type', 'problem_description', 'problem_status', 'comments', 'assignee']

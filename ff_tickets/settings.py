@@ -3,13 +3,13 @@ from pathlib import Path
 
 import cloudinary
 from django.urls import reverse_lazy
+from django.contrib.messages import constants as messages
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = int(os.environ.get('DEBUG', 1))
-
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(' ')
 
 
@@ -63,6 +63,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ff_tickets.wsgi.application'
 
 
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-secondary',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+}
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -73,7 +81,6 @@ DATABASES = {
         'PORT': '5432',
     },
 }
-print(os.environ.get('DB_ENGINE'))
 
 if DEBUG:
     AUTH_PASSWORD_VALIDATORS = []

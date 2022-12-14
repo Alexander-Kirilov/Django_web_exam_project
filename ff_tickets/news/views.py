@@ -10,12 +10,12 @@ class NewsListView(views.ListView):
     template_name = 'core/index.html'
     model = News
 
-    # def get_queryset(self, **kwargs):
-    #     return News.objects.filter().order_by('-created_at')
+    def get_queryset(self, **kwargs):
+        return News.objects.filter().order_by('-created_at')
 
 # if you want to display the last 3 news
-    def get_queryset(self, **kwargs):
-        return News.objects.filter(is_private=False).order_by('-id')[:3]
+#     def get_queryset(self, **kwargs):
+#         return News.objects.filter(is_private=False).order_by('-id')
 
 
 class NewsAllListView(views.ListView):

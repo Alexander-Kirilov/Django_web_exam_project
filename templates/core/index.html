@@ -1,41 +1,20 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-    {% if object_list %}
-        <h1>News</h1>
+
+    {% csrf_token %}
+
+    {% if user.is_authenticated %}
         {% for news in object_list %}
-            {% if not user.is_authenticated %}
-                {% if not news.is_private %}
-                    {#            TODO: make styling in css!#}
-                    <div class="container-sm wrapper" style="max-width: 777px">
-                        <p style="text-align: center; font-weight: bold">
-                            <a style="color: black; text-decoration: none"
-                               href="{% url 'news_details' news.pk %}">{{ news.title }}
-                            </a></p>
-                        <hr>
-                        <p>{{ news.content }}</p>
-                        <hr>
-                        <p style="font-size: 14px; text-align-last: right; font-weight: bold">
-                            {{ news.created_at|date:'Y-M-d H:i' }}
-                            Created by: {{ news.created_by }}</p>
-                        <div class="image">
-                            {% if news.news_photos %}
-                                <img src="{{ news.news_photos.url }}" alt="news{{ news.id }}" width="500px"
-                                     style="position: center">
-                            {% endif %}
-                        </div>
-                    </div>
-                {% endif %}
-                {% else %}
-                {% if not news.is_private %}
-                {#            TODO: make styling in css!#}
+
+            {% if news.is_private %}
                 <div class="container-sm wrapper" style="max-width: 777px">
                     <p style="text-align: center; font-weight: bold">
                         <a style="color: black; text-decoration: none"
                            href="{% url 'news_details' news.pk %}">{{ news.title }}
                         </a></p>
                     <hr>
-                    <p>{{ news.content|linebreaks }}</p>
+                    <p>{{ news.content }}</p>
                     <hr>
                     <p style="font-size: 14px; text-align-last: right; font-weight: bold">
                         {{ news.created_at|date:'Y-M-d H:i' }}
@@ -48,9 +27,34 @@
                     </div>
                 </div>
             {% endif %}
-            {% endif %}
-
         {% endfor %}
+
+
+    {% else %}
+
+    {% for news in object_list %}
+        {% if not news.is_private %}
+        <div class="container-sm wrapper" style="max-width: 777px">
+
+            <p style="text-align: center; font-weight: bold">
+                <a style="color: black; text-decoration: none"
+                   href="{% url 'news_details' news.pk %}">{{ news.title }}
+                </a></p>
+            <hr>
+            <p>{{ news.content }}</p>
+            <hr>
+            <p style="font-size: 14px; text-align-last: right; font-weight: bold">
+                {{ news.created_at|date:'Y-M-d H:i' }}
+                Created by: {{ news.created_by }}</p>
+            <div class="image">
+                {% if news.news_photos %}
+                    <img src="{{ news.news_photos.url }}" alt="news{{ news.id }}" width="500px"
+                         style="position: center">
+                {% endif %}
+            </div>
+        {% endif %}
+        {% endfor %}
+
     {% endif %}
 
 {% endblock %}
