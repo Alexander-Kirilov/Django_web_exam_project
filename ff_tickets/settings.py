@@ -3,7 +3,7 @@ from pathlib import Path
 
 import cloudinary
 from django.urls import reverse_lazy
-from django.contrib.messages import constants as messages
+from django.contrib.messages import constants as message_constants
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -62,15 +62,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ff_tickets.wsgi.application'
 
-
-MESSAGE_TAGS = {
-        messages.DEBUG: 'alert-secondary',
-        messages.INFO: 'alert-info',
-        messages.SUCCESS: 'alert-success',
-        messages.WARNING: 'alert-warning',
-        messages.ERROR: 'alert-danger',
-}
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -100,6 +91,9 @@ else:
         },
     ]
 
+MESSAGE_LEVEL = message_constants.DEBUG
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 LANGUAGE_CODE = 'en-us'
 

@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+    <form method="post" action="{% url 'news_update' pk=news.id %}" enctype="multipart/form-data">
+        <div class="wrapper-edit" style="width: 35rem">
+            <h1 style="text-align: center">Create news</h1>
+            <hr>
+            {{ form.as_p }}
+            <div class="container d-flex justify-content-center" style="width: 10%;">
+                <input type="submit" class="btn btn-primary btn-sm" value="Submit"
+                       style="margin-right: 10px; margin-top: 30px; width: auto;">
+                <input type="submit" class="btn btn-danger btn-sm"
+                       style="margin-top: 30px;width: auto; background-color: darkred; border-color: black"
+                       onclick="window.location='{% url 'news_list_all' %}';
+                               return false;" value="Cancel">
+                {% csrf_token %}
+            </div>
+        </div>
+    </form>
+{% endblock %}

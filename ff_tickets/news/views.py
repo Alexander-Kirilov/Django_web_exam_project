@@ -42,6 +42,8 @@ class NewsDetailView(views.DetailView):
 class NewsUpdateView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     template_name = 'news/news_edit.html'
     model = News
+    fields = ('title', 'content', 'is_private', 'news_photos')
+    success_url = reverse_lazy('news_list_all')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -51,3 +53,5 @@ class NewsUpdateView(auth_mixins.LoginRequiredMixin, views.UpdateView):
 
 class NewsDeleteView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     template_name = 'news/news_confirm_delete.html'
+    model = News
+    success_url = reverse_lazy('index')

@@ -1,6 +1,9 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
+
+    {% if user.is_authenticated %}
+
     <div class="container" style="padding-bottom: 40px">
         {% if object_list %}
             <h1>News</h1>
@@ -58,4 +61,8 @@
             </div>
     </div>
     </div>
+        {% else %}
+
+    {% endif %}
+
 {% endblock %}

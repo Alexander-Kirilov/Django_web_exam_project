@@ -1,3 +1,5 @@
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views import generic as views
 from django.contrib.auth import views as auth_views, login
@@ -7,20 +9,41 @@ from ff_tickets.auth_app.forms import UserCreateForm, ProfileUpdateForm
 from ff_tickets.auth_app.models import AppUser, Profile
 
 
-class SignUpView(views.CreateView):
+class SignUpView(SuccessMessageMixin, views.CreateView):
     template_name = 'auth/register-page.html'
     form_class = UserCreateForm
     success_url = reverse_lazy('index')
+    success_message = f"User is successfully created!"
 
     def form_valid(self, form):
-        result = super().form_valid(form)
+        response = super().form_valid(form)
         login(self.request, self.object)
-        return result
+        success_message = self.get_success_message(form.cleaned_data)
+        if success_message:
+            messages.success(self.request, success_message)
+        return response
+
+    # def get_success_message(self, cleaned_data):
+    #     return self.success_message % cleaned_data
+
+    # def get_success_message(self, cleaned_data):
+    #     return self.success_message % dict(
+    #         cleaned_data,
+    #         calculated_field=self.object.calculated_field,
+    #     )
 
 
-class SignInView(auth_views.LoginView):
+class SignInView(SuccessMessageMixin, auth_views.LoginView):
     template_name = 'auth/login-page.html'
     success_url = reverse_lazy('index')
+    success_message = f"Welcome!"
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        success_message = self.get_success_message(form.cleaned_data)
+        if success_message:
+            messages.success(self.request, success_message)
+        return response
 
 
 class SignOutView(auth_views.LogoutView):

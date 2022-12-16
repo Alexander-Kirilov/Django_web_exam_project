@@ -31,7 +31,7 @@ class Ticket(models.Model):
     created_by = models.ForeignKey(
         UserModel,
         null=True,
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE
     )
 
     problem_type = models.CharField(
@@ -80,7 +80,7 @@ class Ticket(models.Model):
         UserModel,
         null=True,
         blank=True,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         verbose_name='Назначен',
         related_name='assignee_user'
 

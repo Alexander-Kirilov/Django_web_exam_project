@@ -15,22 +15,12 @@
 </head>
 
 <body style="background-image: url({% static 'images/back_fantastico.png' %});">
-<nav>
-    {% include 'base/partials/nav.html' %}
-</nav>
-<div>
-{#    {% if form.errors %}#}
-{#        {% for message in errors %}#}
-{#            <div class="alert alert-warning alert-dismissible fade show" role="alert">#}
-{#                {{ message }}#}
-{#                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>#}
-{#            </div>#}
-{#        {% endfor %}#}
-{#    {% endif %}#}
+{% include 'base/partials/nav.html' %}
+{% include 'base/messages.html' %}
 
-    {% block content %}
-    {% endblock content %}
-</div>
+{% block content %}
+{% endblock %}
+
 <footer class="footer">
     ©Fantastico Group OOD 2022
 </footer>
