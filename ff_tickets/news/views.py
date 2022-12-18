@@ -1,3 +1,5 @@
+from django.contrib import messages
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic as views
 from django.contrib.auth import mixins as auth_mixins
@@ -38,6 +40,9 @@ class NewsCreateView(auth_mixins.PermissionRequiredMixin, views.CreateView):
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
+
+    def error_403(request, exception):
+        return render(request, 'base/403.html')
 
 
 class NewsDetailView(auth_mixins.PermissionRequiredMixin, views.DetailView):

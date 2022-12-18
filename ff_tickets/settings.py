@@ -91,7 +91,7 @@ else:
         },
     ]
 
-MESSAGE_LEVEL = message_constants.DEBUG
+# MESSAGE_LEVEL = message_constants.DEBUG
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
