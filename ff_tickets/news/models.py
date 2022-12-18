@@ -25,7 +25,8 @@ class News(models.Model):
 
     created_by = models.ForeignKey(
         UserModel,
-        on_delete=models.CASCADE,
+        null=True,
+        on_delete=models.SET_NULL,
     )
 
     is_private = models.BooleanField(
@@ -35,7 +36,6 @@ class News(models.Model):
     news_photos = cloudinary_models.CloudinaryField(
         null=True,
         blank=True,
-        # upload_to="images/"
     )
 
     def __str__(self):

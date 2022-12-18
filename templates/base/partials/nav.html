@@ -13,8 +13,8 @@
         <li class="left noHover"><a class="left">
             {% if request.user.is_authenticated %}
                 Hello,
-                {% if user.profile.first_name and user.profile.last_name %}
-                    {{ user.full_name }}
+                {% if request.user.profile_user.first_name and request.user.profile_user.last_name %}
+                    {{ request.user.profile_user.full_name }}
                 {% else %}
                     {{ user.username }}
                 {% endif %}
@@ -22,15 +22,48 @@
                 </li>
                 <li class="right"><a href="{% url 'logout user' %} ">Log out</a></li>
                 <li class="right"><a href="{% url 'details user' pk=request.user.pk %}">Profile</a></li>
-                <li class="right"><a href="{% url 'news_create' %}">Create News</a></li>
-                <li class="right"><a href="{% url 'news_list_all' %}">News</a></li>
-                <li class="right"><a href="{% url 'instruction_create' %}">Create instruction</a></li>
-                <li class="right"><a href="{% url 'instructions_all' %}">instructions</a></li>
-                <li class="right"><a href="{% url 'tickets:all' %}">All tickets</a></li>
-                <li class="right"><a href="{% url 'tickets:ticket create' %}">Add ticket</a></li>
+
+                <li class="nav-item dropdown right">
+                    <a class="nav-link" style="color: #bdbdbd; padding: 0" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        News
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown"  style="background-color: rgba(229,229,229,0.61)">
+                        <li><a class="dropdown-item" href="{% url 'news_list_all' %}">News</a></li>
+                        <li><a class="dropdown-item" href="{% url 'news_create' %}">Create News</a></li>
+                        <li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown right">
+                    <a class="nav-link" style="color: #bdbdbd; padding: 0" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        instructions
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: rgba(229,229,229,0.61)">
+                        <li><a class="dropdown-item" href="{% url 'instructions_all' %}">instructions</a></li>
+                        <li><a class="dropdown-item" href="{% url 'instruction_create' %}">Create instruction</a></li>
+                        <li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown right">
+                    <a class="nav-link" style="color: #bdbdbd; padding: 0" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Tickets
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: rgba(229,229,229,0.61)">
+                        <li><a class="dropdown-item" href="{% url 'tickets:all' %}">All tickets</a></li>
+                        <li><a class="dropdown-item" href="{% url 'tickets:ticket create' %}">Add ticket</a></li>
+                        <li>
+                    </ul>
+                </li>
+
             {% else %}
+
                 <li class="left"><a href="{% url 'register user' %}">Sign up</a></li>
                 <li class="left"><a href="{% url 'login user' %}">Login</a></li>
+
             {% endif %}
     </ul>
 </nav>

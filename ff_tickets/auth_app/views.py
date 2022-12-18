@@ -23,15 +23,6 @@ class SignUpView(SuccessMessageMixin, views.CreateView):
             messages.success(self.request, success_message)
         return response
 
-    # def get_success_message(self, cleaned_data):
-    #     return self.success_message % cleaned_data
-
-    # def get_success_message(self, cleaned_data):
-    #     return self.success_message % dict(
-    #         cleaned_data,
-    #         calculated_field=self.object.calculated_field,
-    #     )
-
 
 class SignInView(SuccessMessageMixin, auth_views.LoginView):
     template_name = 'auth/login-page.html'
@@ -52,19 +43,19 @@ class SignOutView(auth_views.LogoutView):
 
 class UserDetailsView(auth_mixins.LoginRequiredMixin, views.DetailView):
     template_name = 'auth/profile-details-page.html'
-    model = AppUser
+    model = Profile
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['is_owner'] = self.request.user == self.object
+        context['is_owner'] = self.request.user == self.object.user
         return context
 
 
 class UserEditView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     template_name = 'auth/profile-edit-page.html'
-    context_object_name = 'user'
-    queryset = Profile.objects.all()
     form_class = ProfileUpdateForm
+    queryset = Profile.objects.all()
+    success_url = reverse_lazy('details user')
 
     def get_success_url(self):
         return reverse_lazy('details user', kwargs={

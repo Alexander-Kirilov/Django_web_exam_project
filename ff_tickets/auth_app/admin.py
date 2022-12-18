@@ -17,7 +17,7 @@ class ProfileAdmin(admin.ModelAdmin):
         ProfileInline,
     ]
     exclude = ['password']
-    list_display = ("id", "username", "first_name", "last_name", "date_joined", "is_active", "is_staff",)
+    list_display = ("id", "username", "date_joined", "is_active", "is_staff",)
     ordering = ["-is_staff"]
     list_filter = ["is_active", "is_staff"]
     search_fields = ("username", "id")

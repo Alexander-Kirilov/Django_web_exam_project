@@ -1,13 +1,12 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-
     {% csrf_token %}
 
     {% if user.is_authenticated %}
         {% for news in object_list %}
-
             {% if news.is_private %}
+
                 <div class="container-sm wrapper" style="max-width: 777px">
                     <p style="text-align: center; font-weight: bold">
                         <a style="color: black; text-decoration: none"
@@ -19,19 +18,16 @@
                     <p style="font-size: 14px; text-align-last: right; font-weight: bold">
                         {{ news.created_at|date:'Y-M-d H:i' }}
                         Created by: {{ news.created_by }}</p>
-                    <div class="image">
+                    <div class="image" style="display: flex">
                         {% if news.news_photos %}
-                            <img src="{{ news.news_photos.url }}" alt="news{{ news.id }}" width="500px"
-                                 style="position: center">
+                            <img src="{{ news.news_photos.url }}" alt="news{{ news.id }}" width="500px">
                         {% endif %}
                     </div>
                 </div>
             {% endif %}
         {% endfor %}
 
-    {% else %}
-
-    {% for news in object_list %}
+        {% for news in object_list %}
         {% if not news.is_private %}
         <div class="container-sm wrapper" style="max-width: 777px">
 
@@ -42,19 +38,36 @@
             <hr>
             <p>{{ news.content }}</p>
             <hr>
-            <p style="font-size: 14px; text-align-last: right; font-weight: bold">
-                {{ news.created_at|date:'Y-M-d H:i' }}
-                Created by: {{ news.created_by }}</p>
-            <div class="image">
+            <div class="image" style="display: flex">
                 {% if news.news_photos %}
-                    <img src="{{ news.news_photos.url }}" alt="news{{ news.id }}" width="500px"
-                         style="position: center">
+                    <img src="{{ news.news_photos.url }}" alt="news{{ news.id }}" width="500px">
                 {% endif %}
             </div>
         </div>
         {% endif %}
         {% endfor %}
 
+    {% else %}
+
+        {% for news in object_list %}
+        {% if not news.is_private %}
+        <div class="container-sm wrapper" style="max-width: 777px">
+
+            <p style="text-align: center; font-weight: bold">
+                <a style="color: black; text-decoration: none"
+                   href="{% url 'news_details' news.pk %}">{{ news.title }}
+                </a></p>
+            <hr>
+            <p>{{ news.content }}</p>
+            <hr>
+            <div class="image" style="display: flex">
+                {% if news.news_photos %}
+                    <img src="{{ news.news_photos.url }}" alt="news{{ news.id }}" width="500px">
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
     {% endif %}
 
 {% endblock %}

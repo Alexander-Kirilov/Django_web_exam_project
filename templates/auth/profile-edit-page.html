@@ -1,10 +1,12 @@
 {% extends 'base/base.html' %}
 {% load placeholders %}
 {% load static %}
+
 {% block content %}
+
     <div class="wrapper-edit">
         <div class="edit-profile-title">Edit Profile</div>
-        <form method="post" action="{% url 'edit user' pk=user.pk %}">
+        <form method="post" action="{% url 'edit user' pk=request.user.pk %}">
             <i class="validation-summary-errors">
                 {% if form.errors %}
                         {{ form.errors }}
@@ -39,4 +41,5 @@
                 {% csrf_token %}
         </form>
     </div>
+
 {% endblock %}

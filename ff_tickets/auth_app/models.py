@@ -33,38 +33,6 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     USERNAME_FIELD = 'username'
     objects = AppUserManager()
 
-    @property
-    def full_name(self):
-        return f'{self.first_name} {self.last_name}'
-
-    @property
-    def first_name(self):
-        return self.profile.first_name
-
-    @property
-    def last_name(self):
-        return self.profile.last_name
-
-    @property
-    def position(self):
-        return self.profile.position
-
-    @property
-    def address(self):
-        return self.profile.address
-
-    @property
-    def email(self):
-        return self.profile.email
-
-    @property
-    def city(self):
-        return self.profile.city
-
-    @property
-    def country(self):
-        return self.profile.country
-
 
 class Profile(models.Model):
     MIN_LEN_FIRST_NAME = 2
@@ -149,13 +117,11 @@ class Profile(models.Model):
     user = models.OneToOneField(
         AppUser,
         on_delete=models.CASCADE,
+        related_name='profile_user'
     )
 
-    # instructions = modoel.
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
 
     def __str__(self):
         return str(self.user)
-
-
-
-

@@ -3,11 +3,9 @@
 {% block content %}
     {% csrf_token %}
     {#            TODO: make styling in css!#}
-
-    <div class="container-sm wrapper" style="max-width: 500px">
-    <p style="text-align: center; font-weight: bold"><a style="color: black; text-decoration: none"
-                                                        href="{% url 'news_details' news.pk %}">Заглавие:</a><br>{{ news.title }}
-    </p>
+    <div class="container-sm wrapper" style="max-width: 800px">
+    <p style="text-align: center; font-weight: bold"><a style="color: black; text-decoration: none" href="{% url 'news_details' news.pk %}">Заглавие:</a>
+        <br>{{ news.title }}</p>
     <h6>Съдържание: </h6><p>{{ news.content|linebreaks }}</p>
     <hr>
     <p style="font-size: 14px; text-align-last: right; font-weight: bold">{{ news.created_at|date:'Y-M-d H:i' }}
